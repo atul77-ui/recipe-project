@@ -1,0 +1,458 @@
+/* zero out browser default spacing on everything */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* warm cream background with a subtle dot grid texture, green top border */
+body {
+  background-color: #f4f0e8;
+  background-image: radial-gradient(circle, #d6d0c4 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: #1a1a1a;
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  border-top: 3px solid #5c7a3e;
+}
+
+/* make the scrollbar thin and subtle */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f0e8;
+}
+::-webkit-scrollbar-thumb {
+  background: #d6d0c4;
+}
+
+/* the white nav bar that sticks to the top when you scroll */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid #e4dfd7;
+  height: 64px;
+  padding: 0 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* the Flavour logo text */
+.brand-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+/* the "our" part in italic green */
+.brand-name em {
+  font-style: italic;
+  color: #5c7a3e;
+}
+
+/* the small "Find. Save. Cook." next to the logo */
+.brand-tagline {
+  font-family: "DM Mono", monospace;
+  font-size: 0.57rem;
+  color: #b0a99e;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-left: 1.1rem;
+  border-left: 1px solid #e4dfd7;
+  padding-left: 1.1rem;
+}
+
+/* the "Saved 0" pill on the right of the nav */
+.saved-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.58rem;
+  color: #b0a99e;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* the green circle that shows the saved count number */
+.saved-pill-count {
+  background: #5c7a3e;
+  color: #ffffff;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Jost", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0 0.35rem;
+  transition:
+    transform 0.2s ease,
+    background 0.2s;
+}
+
+/* the big search area at the top of the page */
+.hero {
+  padding: 3.5rem 2.75rem 0;
+  text-align: center;
+}
+
+/* "What would you like to cook?" heading */
+.hero-heading {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+
+/* the small subtitle below the heading */
+.hero-sub {
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+  color: #b0a99e;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+}
+
+/* the search bar — input and button fused together as one block */
+.search-bar {
+  display: flex;
+  max-width: 560px;
+  margin: 0 auto 0.65rem;
+  background: #ffffff;
+  border: 1.5px solid #1a1a1a;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+/* turns green with a glow when the user clicks inside it */
+.search-bar:focus-within {
+  border-color: #5c7a3e;
+  box-shadow: 0 0 0 3px rgba(92, 122, 62, 0.1);
+}
+
+/* the text input where you type your search */
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.9rem 1.25rem;
+  font-family: "Jost", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #c8c3ba;
+}
+
+/* the Find Recipes button — goes green on hover */
+.search-btn {
+  background: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  padding: 0 1.75rem;
+  font-family: "Jost", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.search-btn:hover {
+  background: #5c7a3e;
+}
+
+/* red error text that shows up below the search bar — hidden by default */
+.search-error {
+  display: none;
+  font-family: "DM Mono", monospace;
+  font-size: 0.58rem;
+  color: #b83a3a;
+  text-align: center;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+/* padding wrapper for both the results and saved sections */
+.section-wrap {
+  padding: 2.5rem 2.75rem 0;
+}
+
+/* the thin horizontal line between results and saved */
+.section-rule {
+  height: 1px;
+  background: #e4dfd7;
+  margin: 0 2.75rem 2.5rem;
+}
+
+/* the row that holds the section title and count side by side */
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* "Results" or "Saved Recipes" heading text */
+.section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+/* the small grey count text next to the heading e.g. "5 recipes found" */
+.section-count {
+  font-family: "DM Mono", monospace;
+  font-size: 0.58rem;
+  color: #b0a99e;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* the card grid — fills as many columns as fit at 220px each */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+  padding-bottom: 3rem;
+}
+
+/* each individual recipe card */
+.recipe-card {
+  background: #ffffff;
+  border: 1px solid #e4dfd7;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s;
+  animation: cardIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+/* cards fade in and slide up slightly when they appear */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* each card animates in slightly after the previous one */
+.recipe-card:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.recipe-card:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.recipe-card:nth-child(3) {
+  animation-delay: 0.12s;
+}
+.recipe-card:nth-child(4) {
+  animation-delay: 0.16s;
+}
+.recipe-card:nth-child(5) {
+  animation-delay: 0.2s;
+}
+.recipe-card:nth-child(6) {
+  animation-delay: 0.24s;
+}
+.recipe-card:nth-child(7) {
+  animation-delay: 0.28s;
+}
+.recipe-card:nth-child(8) {
+  animation-delay: 0.32s;
+}
+
+/* card lifts up and gets a shadow on hover */
+.recipe-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.09);
+  border-color: #d4cfc6;
+}
+
+/* the green line that slides in from the left when you hover a card */
+.recipe-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #5c7a3e;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.recipe-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* the square food photo at the top of each card */
+.card-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+/* the text area below the photo */
+.card-body {
+  padding: 0.85rem;
+}
+
+/* the recipe name — cuts off at 2 lines with ... */
+.card-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.25;
+  margin-bottom: 0.3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6rem;
+}
+
+/* the small green category label e.g. CHICKEN */
+.card-category {
+  font-family: "DM Mono", monospace;
+  font-size: 0.57rem;
+  color: #5c7a3e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+
+/* the bottom row of the card where the button sits */
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* the green Save Recipe button on result cards */
+.btn-save {
+  background: #5c7a3e;
+  color: #ffffff;
+  border: none;
+  padding: 0.35rem 0.9rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.57rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+
+.btn-save:hover {
+  background: #4a6332;
+  transform: translateY(-1px);
+}
+
+/* greyed out when the recipe is already saved */
+.btn-save:disabled {
+  background: #c4bfb8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* the Remove button on saved cards — goes red on hover */
+.btn-remove {
+  background: transparent;
+  color: #b0a99e;
+  border: 1px solid #e4dfd7;
+  padding: 0.35rem 0.9rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.57rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.15s;
+}
+
+.btn-remove:hover {
+  border-color: #b83a3a;
+  color: #b83a3a;
+  transform: translateY(-1px);
+}
+
+/* the empty state shown when a section has no cards */
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.empty-icon {
+  font-size: 2rem;
+  color: #d6d0c4;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.empty-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #b0a99e;
+  margin-bottom: 0.3rem;
+}
+
+.empty-hint {
+  font-family: "DM Mono", monospace;
+  font-size: 0.57rem;
+  color: #c8c3ba;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* these three sections are hidden by default — JS shows them when needed */
+#results-section {
+  display: none;
+}
+#saved-section {
+  display: none;
+}
+#section-divider {
+  display: none;
+}
